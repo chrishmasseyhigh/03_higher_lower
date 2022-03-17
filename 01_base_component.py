@@ -1,6 +1,27 @@
 import random
 from unittest import result
 #Functions go here
+#checks the amount of rounds and activate infine mode if user enters enter
+def check_rounds(question):
+    while True:
+        #ask for round amount
+        
+        response = input(question)
+
+        #error
+        round_error = "Please enter an intiger that is more than zero"
+        if response !="":
+            try:
+                response = int(response)
+
+                if response <1:
+                    print(round_error)
+                    continue
+            except ValueError:
+                print(round_error)
+                continue
+        
+        return response
 
 #Yes or no checker
 def yes_no(question):
@@ -30,12 +51,14 @@ if played_before =="no":
 print()
 print("program continues")
 print()
-mode = input("Infinite / regular?? ")
 
-if mode == "regular":
-    rounds_wanted = int(input("Rounds? "))
-else:
+rounds_wanted = check_rounds("How many rounds?  Press <enter> for infinite mode: ")
+mode=""
+if rounds_wanted == "":
+    mode = "infinite"
     rounds_wanted = 10
+
+rounds_wanted +=1
 
 # play it
 rounds_played = 1

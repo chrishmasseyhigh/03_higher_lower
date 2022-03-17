@@ -1,6 +1,6 @@
 import random
 
-rounds= 20    
+rounds= 10    
 while rounds >0:    
     user =random.randint(1,20)
     comp_choice =random.randint(1,20)
