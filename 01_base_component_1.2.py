@@ -84,7 +84,34 @@ played_before = yes_no("have you played before? ")
 if played_before =="no":
     instructions()
 print()
+range_yes = yes_no("Want to enter your own range? ")
+if range_yes == "yes":
+    print()
+    lower = check_rounds("lower number: ")
+    print()
+    higher = check_rounds("Higher number: ")
+    if lower == "" :
+        print()
+        print("you pressed enter restarting")
+        print(".............................")
+        print()
+        print(".............................")
+        print()
+        subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])
+    if higher == "":
+        print()
+        print("you pressed enter restarting")
+        print(".............................")
+        print()
+        print(".............................")
+        print()
+        subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])    
 
+
+else:
+    lower=1
+    higher = 20
+print()
 rounds_wanted = check_rounds("How many rounds?  Press <enter> for infinite mode: ")
 mode=""
 if rounds_wanted == "":
@@ -92,9 +119,10 @@ if rounds_wanted == "":
     rounds_wanted = 10
 
 rounds_wanted +=1
-comp_choice =random.randint(1,20)
+comp_choice =random.randint(lower,higher)
 # play it
 rounds_played = 1
+
 while rounds_played < rounds_wanted:
     print()
     print("-----Round {}-----".format(rounds_played))
@@ -103,7 +131,8 @@ while rounds_played < rounds_wanted:
         rounds_wanted += 1
     
     rounds_played += 1
-    user =check_rounds("chose a number bettwen 1 and 20 ")
+    print()
+    user =check_rounds("chose a number bettwen {} and {} ".format(lower,higher))
     if user == "":
         break
     user_input_history_list.append(user)  
@@ -115,9 +144,9 @@ while rounds_played < rounds_wanted:
     elif user == comp_choice:
         result = "you got it"
         print()
-        print("You chose {}"
-                     "\nResult: {}".format(user,result))
-        print("you won")
+        print("You chose {}".format(user,result))
+        print()
+        statement_decorator("you won","!")
         result_history_list.append(result) 
         break
     elif user > comp_choice:
@@ -137,7 +166,7 @@ while rounds_played < rounds_wanted:
 list_amount= 0
 items =0
 print()
-print("number was {}".format(comp_choice))
+print("))))number was {}((((".format(comp_choice))
 if user == "":
     e =user
     print()
