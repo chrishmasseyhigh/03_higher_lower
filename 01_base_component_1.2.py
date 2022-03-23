@@ -119,9 +119,9 @@ if rounds_wanted == "":
     rounds_wanted = 10
 
 rounds_wanted +=1
-
+input_2 =0
 # play it
-rounds_played = 1
+rounds_played = 0
 user = 0
 while rounds_played < rounds_wanted:
     print()
@@ -129,11 +129,12 @@ while rounds_played < rounds_wanted:
     if user =="xxx":
         keep_going = input("press enter to quit ")
         if keep_going == "":
-           rounds_played = 0
+           rounds_played -=1
            break
         else:
             print()
-    
+            rounds_played -=1
+    rounds_played += 1
     print("-----Round {}-----".format(rounds_played))
     #asks user if they want their own range and asks for numbers
     range_yes = yes_no("Want to enter your own range? ")
@@ -151,53 +152,60 @@ while rounds_played < rounds_wanted:
     if mode == "infinite":
         rounds_wanted += 1
     result = "lower"
-    rounds_played += 1
+
     print()
     print("chose a number bettwen {} and {} ".format(lower,higher))
     while result == "lower" or "higher":
         print()
         user = check_rounds_2("Number? ")
+        
         print()
         if user =="xxx":
+            result = "xxx"
             break
         if user < comp_choice:
-            result ="lower"
+            input_2 +=1
+            result ="higher"
         elif user == comp_choice:
+
             result = "you got it"
             print()
             print("You chose {}".format(user,result))
             print()
             statement_decorator("you won","!")
+            print()
+            print("))))number was {}((((".format(comp_choice))
             result_history_list.append(result) 
             break
         elif user > comp_choice:
-            result = "higher"
-
+            input_2 +=1
+            result = "lower"
+        print(input_2)
+        user_input_history_list.append(user)
         result_history_list.append(result) 
-        
+        print(user_input_history_list)
         print()
         print("You chose {}"
                 "\nResult: {}".format(user,result))
+
+list_amount = 0
+items = 1
+rounds_played +=1
+
+while items < rounds_played:
+    print("----round {}----".format(items))
+    item_2 = 1
     
+    while item_2 < input_2:
 
-list_amount= 0
-items =0
-print()
-print("))))number was {}((((".format(comp_choice))
-
-
-while items< rounds_played:
-        if list_amount == rounds_played -1:
-            break
-        elif rounds_played == 0:
-            break
-
-        items +=1
-        
         user_history = user_input_history_list[list_amount]
         result_history = result_history_list[list_amount]
-        print("round {}, you chose ({}) your choice was ({})".format(items,user_history,result_history))
+        print("----round {}----".format(items))
+        print(" you chose ({}) your choice was ({})".format(user_history,result_history))
 
         list_amount +=1
+    
+    items +=1
+    list_amount +=1
 print()
 statement_decorator("Thank you for playing","=")
