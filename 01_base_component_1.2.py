@@ -197,27 +197,29 @@ print("----round {}----".format(items))
 items = 0
 # prints user history
 while items < rounds_played:
-    
-    item_2 = 1
+    round = 1
+    item_2 = 0
     
     while item_2 < input_2 :
         
         user_history = user_input_history_list[list_amount]
         result_history = result_history_list[list_amount]
         #prints what was chosen
-        print("{} choice ".format(item_2))
+        print("{} choice ".format(round))
         print(" you chose ({}) number was was ({})".format(user_history,result_history))
         if result_history =="you got it":
             item_2 = input_2
-        item_2 +=1
+        round +=1
         list_amount +=1
     items +=1
     items_3 +=1
-    if rounds_played >1:
+    if items == rounds_played:
+        break
+    elif rounds_played >1:
         print("----round {}----".format(items_3))
     else:
         break
     
-    list_amount +=1
+    
 print()
 statement_decorator("Thank you for playing","=")
