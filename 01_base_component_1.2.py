@@ -207,8 +207,10 @@ while items < rounds_played:
         #prints what was chosen
         print("{} choice ".format(round))
         print(" you chose ({}) number was was ({})".format(user_history,result_history))
-        if result_history =="you got it":
+
+        if result_history =="you got it" :
             item_2 = input_2
+        
         round +=1
         list_amount +=1
     items +=1
