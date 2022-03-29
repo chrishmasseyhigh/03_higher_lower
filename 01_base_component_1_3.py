@@ -4,39 +4,49 @@ from tkinter import E
 from unittest import result
 #Functions go here
 
-#checks the amount of rounds and activate infine mode if user enters enter
-def int_check(question, low, high = None, code = None):
+# Number checking function goes here
+def intcheck(question, low=None, high=None, exit_code = None):
+
     while True:
-        #ask for round amount
-        
-        response = input(question)
 
-        if code == response:
-            return response
-
-        #error
-        round_error = "Please enter an intiger that is more than zero"
+        # sets up error messages
+        if low is not None and high is not None:
+            error = "Please enter an integer between {} and {} (inclusive)".format(low, high)
+        elif low is not None and high is None:
+            error = "Please enter an integer that is more than or equal to {}".format(low)
+        elif low is None and high is not None:
+            error = "Please enter an integer that is less than or equal to {}".format(high)
+        else:
+            error = "Please enter an integer"
 
         try:
-            response = int(response)
-
-            if high == None and response <low:
-                print(round_error)
-                continue
-            elif low <= response <= high:
+            response = input(question)
+            
+            # check to see if response is the exit code and return it
+            if response == exit_code:
                 return response
-            else: 
-                print(round_error)
+            
+            # change the response into an integer
+            else:
+                response = int(response)
 
+            # Checks response is not too low, not use of 'is not' keywords
+            if low is not None and response < low:
+                print(error)
+                continue
 
-        
+            # Checks response is not too high
+            if high is not None and response > high:
+                print(error)
+                continue
+
+            return response
+
+        # checks input is a integer
         except ValueError:
-            print(round_error)
+            print(error)
             continue
         
- 
-
-
 #statement decorator
 def statement_decorator(statement, decoration):
     sides = decoration * 3
@@ -91,7 +101,7 @@ def instructions():
 # ******* main rotine ********
 user_input_history_list = []
 result_history_list = []
-statement_decorator("Welcome to the higher lower game","/")
+statement_decorator("\x1b[3mWelcome to the higher lower game","/")
 print()
 played_before = yes_no("have you played before? ")
 if played_before =="no":
@@ -101,7 +111,7 @@ print()
 
 print()
 #asks for rounds
-rounds_wanted = int_check("How many rounds?  Press <enter> for infinite mode: ", 0, code = "")
+rounds_wanted = intcheck("How many rounds?  Press <enter> for infinite mode: ", 0, exit_code = "")
 mode=""
 if rounds_wanted == "":
     mode = "infinite"
@@ -130,13 +140,9 @@ while rounds_played < rounds_wanted:
 
     if range_yes == "yes":
         print()
-        lower = int_check("lower number: ", 0)
+        lower = intcheck("lower number: ", 0)
         print()
-        higher = int_check("Higher number: ", lower)
-        if lower >= higher:
-            print("lower is smaller than higher restarting......")
-            print()
-            subprocess.call([sys.executable, os.path.realpath(__file__)] + sys.argv[1:])    
+        higher = intcheck("Higher number: ", lower)
 
     
     else:
@@ -153,7 +159,7 @@ while rounds_played < rounds_wanted:
     print("chose a number bettwen {} and {} ".format(lower,higher))
     while result == "lower" or "higher":
         print()
-        user = int_check("Number? ", lower, higher, "xxx")
+        user = intcheck("Number? ", lower, higher, "xxx")
         
         print()
         if user =="xxx":
