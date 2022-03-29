@@ -5,48 +5,36 @@ from unittest import result
 #Functions go here
 
 #checks the amount of rounds and activate infine mode if user enters enter
-def check_rounds(question):
+def int_check(question, low, high = None, code = None):
     while True:
         #ask for round amount
         
         response = input(question)
 
-        #error
-        round_error = "Please enter an intiger that is more than zero"
-        if response !="":
-            try:
-                response = int(response)
-
-                if response <1:
-                    print(round_error)
-                    continue
-            except ValueError:
-                print(round_error)
-                continue
-        
-        return response
-#checks the amount of rounds and activate infine mode if user enters enter
-def check_rounds_2(question):
-    while True:
-        #ask for round amount
-        
-        response = input(question)
+        if code == response:
+            return response
 
         #error
         round_error = "Please enter an intiger that is more than zero"
 
-        if response !="xxx":
-            try:
-                response = int(response)
+        try:
+            response = int(response)
 
-                if response <1:
-                    print(round_error)
-                    continue
-            except ValueError:
+            if high == None and response <low:
                 print(round_error)
                 continue
+            elif low <= response <= high:
+                return response
+            else: 
+                print(round_error)
+
+
         
-        return response
+        except ValueError:
+            print(round_error)
+            continue
+        
+ 
 
 
 #statement decorator
@@ -113,7 +101,7 @@ print()
 
 print()
 #asks for rounds
-rounds_wanted = check_rounds("How many rounds?  Press <enter> for infinite mode: ")
+rounds_wanted = int_check("How many rounds?  Press <enter> for infinite mode: ", 0, code = "")
 mode=""
 if rounds_wanted == "":
     mode = "infinite"
@@ -142,9 +130,9 @@ while rounds_played < rounds_wanted:
 
     if range_yes == "yes":
         print()
-        lower = check_rounds_2("lower number: ")
+        lower = int_check("lower number: ", 0)
         print()
-        higher = check_rounds_2("Higher number: ")
+        higher = int_check("Higher number: ", lower)
         if lower >= higher:
             print("lower is smaller than higher restarting......")
             print()
@@ -165,7 +153,7 @@ while rounds_played < rounds_wanted:
     print("chose a number bettwen {} and {} ".format(lower,higher))
     while result == "lower" or "higher":
         print()
-        user = check_rounds_2("Number? ")
+        user = int_check("Number? ", lower, higher, "xxx")
         
         print()
         if user =="xxx":
