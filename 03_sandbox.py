@@ -2,7 +2,9 @@ import os ;import sys ;import subprocess
 def calculateGrade():
     try:
         val = float(input("Enter your marks: "))
-        if val >= 90 and val <= 100:
+        if val == 100:
+            print("wow")
+        elif val >= 90 and val <= 100:
             print("Outstanding")
         elif val >= 80 and val < 90:
             print("Excellent")
@@ -14,6 +16,7 @@ def calculateGrade():
             print("Work hard")
         elif val>=0 and val<30:
             print("Poor")
+        
         else:
             raise ValueError("Enter a valid score, i.e., between 0 and 100")
     except Exception as err:
