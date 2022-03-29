@@ -108,7 +108,6 @@ if played_before =="no":
     instructions()
 print()
 
-
 print()
 #asks for rounds
 rounds_wanted = intcheck("How many rounds?  Press <enter> for infinite mode: ", 0, exit_code = "")
