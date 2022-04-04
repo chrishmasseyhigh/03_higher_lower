@@ -92,7 +92,7 @@ def instructions():
     *******************************************************************************************
     *You will first eneter a number of rounds you want to play for or enter for infinite mode.****************************************************
     *Next you will enter a number and the game will tell you if it is higher or lower or yiou can press enter to restart the code or xxx to quit.* 
-    *At the end tt will reveal the number and dispay your win rate and choices.*******************************************************************
+    *At the end it will reveal the number and dispay your win rate and choices.*******************************************************************
     **************************************************************************
     ''',)
 
